@@ -1,9 +1,0 @@
-C:\Data\Entwicklung\jwt\MongoDBLibrary\bin\Debug\netcoreapp2.2\MongoData.deps.json
-C:\Data\Entwicklung\jwt\MongoDBLibrary\bin\Debug\netcoreapp2.2\MongoData.dll
-C:\Data\Entwicklung\jwt\MongoDBLibrary\bin\Debug\netcoreapp2.2\MongoData.pdb
-C:\Data\Entwicklung\jwt\MongoDBLibrary\obj\Debug\netcoreapp2.2\MongoData.csprojAssemblyReference.cache
-C:\Data\Entwicklung\jwt\MongoDBLibrary\obj\Debug\netcoreapp2.2\MongoData.csproj.CoreCompileInputs.cache
-C:\Data\Entwicklung\jwt\MongoDBLibrary\obj\Debug\netcoreapp2.2\MongoData.AssemblyInfoInputs.cache
-C:\Data\Entwicklung\jwt\MongoDBLibrary\obj\Debug\netcoreapp2.2\MongoData.AssemblyInfo.cs
-C:\Data\Entwicklung\jwt\MongoDBLibrary\obj\Debug\netcoreapp2.2\MongoData.dll
-C:\Data\Entwicklung\jwt\MongoDBLibrary\obj\Debug\netcoreapp2.2\MongoData.pdb

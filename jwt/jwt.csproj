@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MongoDBLibrary\MongoData.csproj" />
+    <ProjectReference Include="..\MongoData\MongoData.csproj" />
   </ItemGroup>
 
 </Project>

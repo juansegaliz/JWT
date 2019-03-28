@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.438
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "jwt", "jwt\jwt.csproj", "{BC13F10C-63C3-4610-8E62-4425F4AA4A78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoData", "MongoDBLibrary\MongoData.csproj", "{6CB0B820-1DBB-4584-885C-F03EDE4AD8D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoData", "MongoData\MongoData.csproj", "{8C86D7CC-59C3-4497-828A-F608F710F812}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{BC13F10C-63C3-4610-8E62-4425F4AA4A78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC13F10C-63C3-4610-8E62-4425F4AA4A78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC13F10C-63C3-4610-8E62-4425F4AA4A78}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6CB0B820-1DBB-4584-885C-F03EDE4AD8D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6CB0B820-1DBB-4584-885C-F03EDE4AD8D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6CB0B820-1DBB-4584-885C-F03EDE4AD8D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6CB0B820-1DBB-4584-885C-F03EDE4AD8D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C86D7CC-59C3-4497-828A-F608F710F812}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C86D7CC-59C3-4497-828A-F608F710F812}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C86D7CC-59C3-4497-828A-F608F710F812}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C86D7CC-59C3-4497-828A-F608F710F812}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
