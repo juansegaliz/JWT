@@ -20,6 +20,9 @@ namespace jwt.Models.Database
         [Required]
         public string GUID { get; set; }
 
+        [MaxLength(50)]
+        public string Role { get; set; }
+
         [Required]
         [Column(TypeName = "datetime")]
         public DateTime Created { get; set; }

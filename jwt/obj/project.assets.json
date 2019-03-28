@@ -5064,6 +5064,19 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
+      },
+      "MongoData/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "dependencies": {
+          "MongoDB.Driver": "2.8.0"
+        },
+        "compile": {
+          "bin/placeholder/MongoData.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MongoData.dll": {}
+        }
       }
     }
   },
@@ -13846,6 +13859,11 @@
         "system.xml.xpath.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xdocument.nuspec"
       ]
+    },
+    "MongoData/1.0.0": {
+      "type": "project",
+      "path": "../MongoData/MongoData.csproj",
+      "msbuildProject": "../MongoData/MongoData.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -13856,7 +13874,7 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.2.3",
       "Microsoft.NETCore.App >= 2.2.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.2.0",
-      "MongoDB.Driver >= 2.8.0",
+      "MongoData >= 1.0.0",
       "System.IdentityModel.Tokens.Jwt >= 5.4.0"
     ]
   },
@@ -13867,11 +13885,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\juansegaliz\\source\\repos\\jwt\\jwt\\jwt.csproj",
+      "projectUniqueName": "C:\\Data\\Entwicklung\\jwt\\jwt\\jwt.csproj",
       "projectName": "jwt",
-      "projectPath": "C:\\Users\\juansegaliz\\source\\repos\\jwt\\jwt\\jwt.csproj",
+      "projectPath": "C:\\Data\\Entwicklung\\jwt\\jwt\\jwt.csproj",
       "packagesPath": "C:\\Users\\juansegaliz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\juansegaliz\\source\\repos\\jwt\\jwt\\obj\\",
+      "outputPath": "C:\\Data\\Entwicklung\\jwt\\jwt\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13889,7 +13907,11 @@
       },
       "frameworks": {
         "netcoreapp2.2": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Data\\Entwicklung\\jwt\\MongoData\\MongoData.csproj": {
+              "projectPath": "C:\\Data\\Entwicklung\\jwt\\MongoData\\MongoData.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -13929,10 +13951,6 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[2.2.0, )"
-          },
-          "MongoDB.Driver": {
-            "target": "Package",
-            "version": "[2.8.0, )"
           },
           "System.IdentityModel.Tokens.Jwt": {
             "target": "Package",

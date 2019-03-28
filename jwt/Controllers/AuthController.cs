@@ -10,6 +10,8 @@ using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using jwt.Data;
+using MongoData.Entities;
+using MongoData.Dao;
 
 namespace jwt.Controllers
 {
@@ -53,6 +55,18 @@ namespace jwt.Controllers
                 );
 
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+
+            Authorization authorization = new Authorization
+            {
+                Id_user = dbUser.Id_user,
+                Username = dbUser.Username,
+                Role = dbUser.Role,
+                GUID = dbUser.GUID,
+                Id_state = dbUser.Id_state
+            };
+
+            AuthorizationDAO authorizationDAO = new AuthorizationDAO();
+            authorizationDAO.Create(authorization);
 
             return Ok(new { Token = tokenString });            
         }
