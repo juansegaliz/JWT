@@ -3,5 +3,7 @@
 ################################################################################
 
 .vs/
-jwt/bin/Debug/
 jwt/obj/
+jwt/bin/Debug/
+MongoData/obj/
+MongoData/bin/Debug/
