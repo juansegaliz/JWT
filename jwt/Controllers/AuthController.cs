@@ -10,8 +10,7 @@ using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using jwt.Data;
-using MongoData.Entities;
-using MongoData.Dao;
+using MongoData.Controllers;
 
 namespace jwt.Controllers
 {
@@ -20,10 +19,12 @@ namespace jwt.Controllers
     public class AuthController : ControllerBase
     {
         private readonly JWTDbDBContext _jWTDbDBContext;
+        private readonly AuthorizationController _authorizationController;
 
         public AuthController(JWTDbDBContext jWTDbDBContext)
         {
             _jWTDbDBContext = jWTDbDBContext;
+            _authorizationController = new AuthorizationController();
         }
 
         [HttpPost]
@@ -56,7 +57,7 @@ namespace jwt.Controllers
 
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
-            Authorization authorization = new Authorization
+            MongoData.Models.DTO.AuthorizationDTO authorization = new MongoData.Models.DTO.AuthorizationDTO
             {
                 Id_user = dbUser.Id_user,
                 Username = dbUser.Username,
@@ -65,8 +66,7 @@ namespace jwt.Controllers
                 Id_state = dbUser.Id_state
             };
 
-            AuthorizationDAO authorizationDAO = new AuthorizationDAO();
-            authorizationDAO.Create(authorization);
+            _authorizationController.Create(authorization);
 
             return Ok(new { Token = tokenString });            
         }

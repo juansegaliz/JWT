@@ -4,7 +4,6 @@ using jwt.Models.Database;
 using jwt.Models.Application;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using MongoData.Dao;
 
 namespace jwt.Controllers
 {
@@ -46,15 +45,5 @@ namespace jwt.Controllers
             var Users = _jWTDbDBContext.Users.Select(r => r.Username);
             return Ok(Users);
         }
-
-        [HttpGet]
-        [Route("[Action]")]
-        public IActionResult GetMongo()
-        {
-            AuthorizationDAO authorizationDAO = new AuthorizationDAO();
-            var getAuthorizations = authorizationDAO.Read();
-            return Ok(getAuthorizations);
-        }
-
     }
 }

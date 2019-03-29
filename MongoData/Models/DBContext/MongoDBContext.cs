@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using MongoDB.Driver;
-using MongoData.Entities;
 
 
 namespace MongoData.Models.DBContext
