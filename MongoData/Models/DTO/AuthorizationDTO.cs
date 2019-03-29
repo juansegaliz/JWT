@@ -6,9 +6,9 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
 
-namespace MongoData.Entities
+namespace MongoData.Models.DTO
 {
-    public class Authorization
+    public class AuthorizationDTO
     {
         [BsonId]
         public ObjectId Id { get; set; }

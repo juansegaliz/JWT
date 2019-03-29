@@ -4,6 +4,8 @@
 
 .vs/
 jwt/obj/
+jwt/obj/Debug/
 jwt/bin/Debug/
 MongoData/obj/
+MongoData/obj/Debug/
 MongoData/bin/Debug/
