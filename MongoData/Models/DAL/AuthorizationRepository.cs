@@ -23,19 +23,19 @@ namespace MongoData.Models.DAL
 
         public string Create(AuthorizationDTO authorization)
         {
-            authorization.Id = new ObjectId();
+            authorization.Id = ObjectId.GenerateNewId().ToString();
             _authorizations.InsertOne(authorization);
             return authorization.Id.ToString();
         }
 
         public List<AuthorizationDTO> Read()
         {
-            return _authorizations.AsQueryable<AuthorizationDTO>().ToList();
+            return _authorizations.Find(r => true).ToList();
         }
 
         public AuthorizationDTO Read(string Id)
         {
-            return _authorizations.AsQueryable<AuthorizationDTO>().ToList().Where(r => r.Id.Equals(Id)).FirstOrDefault();
+            return _authorizations.Find<AuthorizationDTO>(r => r.Id == Id).FirstOrDefault();
         }
 
         public void Update(string Id, AuthorizationDTO authorization)

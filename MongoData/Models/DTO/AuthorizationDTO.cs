@@ -12,7 +12,7 @@ namespace MongoData.Models.DTO
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public ObjectId Id { get; set; }
+        public string Id { get; set; }
 
         [BsonElement("id_user")]
         public int Id_user { get; set; }
