@@ -23,4 +23,9 @@
     <ProjectReference Include="..\MongoData\MongoData.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\DAL\" />
+    <Folder Include="Models\Interfaces\" />
+  </ItemGroup>
+
 </Project>

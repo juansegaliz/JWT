@@ -10,7 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using jwt.Middlewares.Extensions;
-using jwt.Data;
+using jwt.Controllers.Classes;
+using jwt.Models.DBContext;
 
 namespace jwt
 {
@@ -36,15 +37,15 @@ namespace jwt
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
 
-                        ValidIssuer = "http://localhost:44345",
-                        ValidAudience = "http://localhost:44345",
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("TW9zaGVFcmV6UHJpdmF0ZUtleQ=="))
+                        ValidIssuer = JWT.Issuer,
+                        ValidAudience = JWT.Audience,
+                        IssuerSigningKey = JWT.GetSecretKey
                     };
                 });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddDbContext<JWTDbDBContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
+            services.AddDbContext<JWTDBContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

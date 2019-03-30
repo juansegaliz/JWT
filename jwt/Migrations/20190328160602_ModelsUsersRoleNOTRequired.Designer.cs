@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using jwt.Data;
+using jwt.Models.DBContext;
 
 namespace jwt.Migrations
 {
-    [DbContext(typeof(JWTDbDBContext))]
+    [DbContext(typeof(JWTDBContext))]
     [Migration("20190328160602_ModelsUsersRoleNOTRequired")]
     partial class ModelsUsersRoleNOTRequired
     {

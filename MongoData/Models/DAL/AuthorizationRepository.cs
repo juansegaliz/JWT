@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using System.Collections.Generic;
 using MongoDB.Driver;
 using MongoData.Models.DBContext;
 using MongoData.Models.DTO;
 using MongoData.Models.Interfaces;
+using MongoDB.Bson;
 
 namespace MongoData.Models.DAL
 {
@@ -19,14 +21,21 @@ namespace MongoData.Models.DAL
             _authorizations = _mongoDBContext.Database.GetCollection<AuthorizationDTO>("authorizations");
         }
 
-        public void Create(AuthorizationDTO authorization)
+        public string Create(AuthorizationDTO authorization)
         {
+            authorization.Id = new ObjectId();
             _authorizations.InsertOne(authorization);
+            return authorization.Id.ToString();
         }
 
         public List<AuthorizationDTO> Read()
         {
             return _authorizations.AsQueryable<AuthorizationDTO>().ToList();
+        }
+
+        public AuthorizationDTO Read(string Id)
+        {
+            return _authorizations.AsQueryable<AuthorizationDTO>().ToList().Where(r => r.Id.Equals(Id)).FirstOrDefault();
         }
 
         public void Update(string Id, AuthorizationDTO authorization)

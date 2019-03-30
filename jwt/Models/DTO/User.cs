@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
-namespace jwt.Models.Database
+namespace jwt.Models.DTO
 {
-    public class Users
+    public class User
     {
         [Key]
         public int Id_user { get; set; }

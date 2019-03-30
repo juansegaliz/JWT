@@ -16,14 +16,19 @@ namespace MongoData.Controllers
             authorizationRepository = new AuthorizationRepository();
         }
 
-        public void Create(AuthorizationDTO authorization)
+        public string Create(AuthorizationDTO authorization)
         {
-            authorizationRepository.Create(authorization);
+            return authorizationRepository.Create(authorization);
         }
 
         public List<AuthorizationDTO> Read()
         {
             return authorizationRepository.Read();
+        }
+
+        public AuthorizationDTO Read(string Id)
+        {
+            return authorizationRepository.Read(Id);
         }
 
         public void Update(string Id, AuthorizationDTO authorization)

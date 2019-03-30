@@ -1,17 +1,22 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using MongoData.Controllers;
+using MongoData.Models.DTO;
 
 namespace jwt.Middlewares.Classes
 {
     public class IFKCustomAuthorization
     {
         private readonly RequestDelegate _next;
+        private readonly AuthorizationController _authorizationController;
 
         public IFKCustomAuthorization(RequestDelegate next)
         {
+            _authorizationController = new AuthorizationController();
             _next = next;
         }
 
@@ -21,14 +26,26 @@ namespace jwt.Middlewares.Classes
             {
                 ClaimsPrincipal userClaims = context.User;
 
-                var claims = new List<Claim>
+                Claim getHash_mongoDocumentId = userClaims.Claims.Where(r => r.Type == ClaimTypes.Hash).FirstOrDefault();
+
+                if (getHash_mongoDocumentId != null)
                 {
-                    new Claim(ClaimTypes.Role, "Usuario")
-                };
+                    string mongoDocumentId = getHash_mongoDocumentId.Value;
 
-                ClaimsIdentity claimsIdentityRole = new ClaimsIdentity(claims);
+                    AuthorizationDTO Authorization = _authorizationController.Read(mongoDocumentId);
 
-                userClaims.AddIdentity(claimsIdentityRole);
+                    if (Authorization != null)
+                    {
+                        var claims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.Role, Authorization.Role)
+                        };
+
+                        ClaimsIdentity claimsIdentityRole = new ClaimsIdentity(claims);
+
+                        userClaims.AddIdentity(claimsIdentityRole);
+                    }
+                }
             }
 
             await _next(context);

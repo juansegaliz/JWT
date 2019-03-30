@@ -4,12 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using jwt.Models.Application;
+using jwt.Controllers.DTO;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using jwt.Data;
+using jwt.Models.DBContext;
 using MongoData.Controllers;
 
 namespace jwt.Controllers
@@ -18,10 +18,10 @@ namespace jwt.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly JWTDbDBContext _jWTDbDBContext;
+        private readonly JWTDBContext _jWTDbDBContext;
         private readonly AuthorizationController _authorizationController;
 
-        public AuthController(JWTDbDBContext jWTDbDBContext)
+        public AuthController(JWTDBContext jWTDbDBContext)
         {
             _jWTDbDBContext = jWTDbDBContext;
             _authorizationController = new AuthorizationController();
@@ -29,34 +29,16 @@ namespace jwt.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public IActionResult Login([FromBody]LoginModel user)
+        public IActionResult Login([FromBody]Login user)
         {
             if (user == null) return BadRequest("Invalid client request");
 
-            var getUser = _jWTDbDBContext.Users.Where(r => r.Username == user.UserName && r.Password == user.Password);
+            var getUser = _jWTDbDBContext.Users.Where(r => r.Username == user.Username && r.Password == user.Password);
 
             if (getUser.Count() == 0) return Unauthorized();
 
             var dbUser = getUser.FirstOrDefault();
-
-            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("TW9zaGVFcmV6UHJpdmF0ZUtleQ=="));
-            var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256Signature);
-
-            var tokenOptions = new JwtSecurityToken(
-                issuer: "http://localhost:44345",
-                audience: "http://localhost:44345",
-                claims: new List<Claim>()
-                {
-                    new Claim(ClaimTypes.NameIdentifier, dbUser.Id_user.ToString()),
-                    new Claim(ClaimTypes.Name, dbUser.Username),
-                    new Claim(ClaimTypes.SerialNumber, dbUser.GUID)
-                },
-                expires: DateTime.Now.AddMinutes(5),
-                signingCredentials: signinCredentials
-                );
-
-            var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-
+            
             MongoData.Models.DTO.AuthorizationDTO authorization = new MongoData.Models.DTO.AuthorizationDTO
             {
                 Id_user = dbUser.Id_user,
@@ -66,7 +48,9 @@ namespace jwt.Controllers
                 Id_state = dbUser.Id_state
             };
 
-            _authorizationController.Create(authorization);
+            string mongoAuthorizationDocumentId = _authorizationController.Create(authorization);
+
+            var tokenString = Controllers.Classes.JWT.GetToken(dbUser.Id_user.ToString(), dbUser.Username, dbUser.GUID, mongoAuthorizationDocumentId);
 
             return Ok(new { Token = tokenString });            
         }

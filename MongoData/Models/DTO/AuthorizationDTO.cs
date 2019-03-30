@@ -11,6 +11,7 @@ namespace MongoData.Models.DTO
     public class AuthorizationDTO
     {
         [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public ObjectId Id { get; set; }
 
         [BsonElement("id_user")]

@@ -1,9 +1,10 @@
-﻿using System;
-using jwt.Data;
-using jwt.Models.Database;
-using jwt.Models.Application;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
+using jwt.Controllers.DTO;
+using jwt.Models.DBContext;
+using jwt.Models.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace jwt.Controllers
 {
@@ -11,20 +12,20 @@ namespace jwt.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly JWTDbDBContext _jWTDbDBContext;
+        private readonly JWTDBContext _jWTDbDBContext;
 
-        public UsersController(JWTDbDBContext jWTDbDBContext)
+        public UsersController(JWTDBContext jWTDbDBContext)
         {
             _jWTDbDBContext = jWTDbDBContext;
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] UserModel.Create postUser)
+        public IActionResult Post([FromBody] Controllers.DTO.User.Create postUser)
         {
             if (postUser == null) return BadRequest();
             if (String.IsNullOrEmpty(postUser.Username) || String.IsNullOrEmpty(postUser.Password)) return BadRequest();
 
-            Users newUser = new Users()
+            Models.DTO.User newUser = new Models.DTO.User()
             {
                 Username = postUser.Username,
                 Password = postUser.Password,
@@ -40,6 +41,7 @@ namespace jwt.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Get()
         {
             var Users = _jWTDbDBContext.Users.Select(r => r.Username);

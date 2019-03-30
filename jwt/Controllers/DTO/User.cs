@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace jwt.Models.Application
+namespace jwt.Controllers.DTO
 {
-    public class UserModel
+    public class User
     {
         public class Create
         {
